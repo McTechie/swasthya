@@ -26,7 +26,7 @@ module.exports = {
     'plugin:react-hooks/recommended'
   ],
   rules: {
-    'no-console': 'error',
+    'no-console': 'warn',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'unicorn/filename-case': 'off',
@@ -34,5 +34,6 @@ module.exports = {
     'quotes': [2, 'single'],
     'unicorn/consistent-function-scoping': 'off',
     'unicorn/no-nested-ternary': 'off',
+    'no-async-promise-executor': 'off',
   }
 }

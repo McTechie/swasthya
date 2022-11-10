@@ -69,14 +69,12 @@ const SignupPage = () => {
         const response = await axios.post(url, resumeProcessed)
         setFileUploadStatus(response.status)
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.log(error)
       }
     }
   }
 
   const submitData = data => {
-    // eslint-disable-next-line no-console
     console.log(data)
   }
 
