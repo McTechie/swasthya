@@ -15,7 +15,7 @@ export default function Home() {
 
       <Navbar />
 
-      <main className='mt-[5.2rem]'>
+      <main className='mt-36'>
         <Section1 />
         <Section2 />
         <Section3 />

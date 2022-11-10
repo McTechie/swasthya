@@ -11,7 +11,7 @@ const Section2 = () => {
   }
 
   return (
-    <section className='relative overflow-hidden'>
+    <section className='relative overflow-hidden bg-[#006369] py-52'>
       <div className='grid grid-cols-2 pl-20'>
         <motion.div
           viewport={{ once: true }}
@@ -22,12 +22,12 @@ const Section2 = () => {
             transition: { duration: 1 }
           }}
         >
-          <h2 className='text-6xl text-teal-800 opacity-80 pb-10'>
+          <h2 className='text-6xl text-white opacity-80 pb-10'>
             Powered by Blockchain
           </h2>
 
           <div className='mb-10 leading-10'>
-            <p className='text-teal-700'>
+            <p className='text-gray-300'>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit! Lorem,
               ipsum dolor sit amet consectetur adipisicing elit. Ex suscipit
               eveniet architecto reprehenderit, quidem maiores maxime
@@ -45,18 +45,20 @@ const Section2 = () => {
           </div>
         </motion.div>
 
-        <motion.div
-          className='pl-20'
-          viewport={{ once: true }}
-          whileInView={{
-            scale: [0.5, 1],
-            x: [100, 0],
-            opacity: [0, 1],
-            transition: { duration: 1 }
-          }}
-        >
-          <Image src='/section2.svg' width={550} height={550} />
-        </motion.div>
+        <div className='rotate-2'>
+          <motion.div
+            className='mx-20 bg-teal-100 rounded-lg px-20'
+            viewport={{ once: true }}
+            whileInView={{
+              scale: [0.5, 1],
+              x: [100, 0],
+              opacity: [0, 1],
+              transition: { duration: 1 }
+            }}
+          >
+            <Image src='/section2.svg' width={550} height={550} />
+          </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -3,6 +3,57 @@ import Image from 'next/image'
 import { LoginForm } from '../components'
 
 export default function Login() {
+
+  // TODO: Registration Form
+  /** 
+   * PATIENT FORM
+   * ----------------
+   * Title
+   * First Name
+   * Middle Name
+   * Last Name
+   * DOB
+   * Gender
+   * Phone
+   * Email
+   * Complete Address
+   * City
+   * State
+   * Pincode
+   * ID Proof
+   * -----------------
+   * Ailment
+     * Name
+     * Duration
+     * Medications
+       * Name
+       * Dosage
+     * Reports
+   */
+
+  /** 
+   * DOCTOR FORM
+   * ----------------
+   * First Name
+   * Middle Name
+   * Last Name
+   * DOB
+   * Gender
+   * Phone
+   * Email
+   * City
+   * State
+   * Pincode
+   * ID Proof
+   * Qualifications
+   * Degree / Certification Proof
+   * Accolades
+   * Practicing Centres / Institutes
+     * Name
+     * Location
+     * Visiting Hours
+   */
+
   return (
     <div className='overflow-y-hidden'>
       <Head>

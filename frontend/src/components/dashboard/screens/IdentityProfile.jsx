@@ -79,7 +79,7 @@ const appointments = [
 
 const IdentityProfile = () => {
   return (
-    <div>
+    <div className='m-20'>
       <div className='flex justify-between'>
         <h1 className='text-3xl text-teal-700 flex items-end space-x-4'>
           My Profile
