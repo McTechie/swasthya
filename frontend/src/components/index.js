@@ -8,7 +8,11 @@ export { default as Section2 } from './home/Section2'
 export { default as Section3 } from './home/Section3'
 
 // login page components
-export { default as LoginForm } from './login/LoginForm'
+export { default as LoginForm } from './auth/LoginForm'
+
+// signup page components
+export { default as PatientForm } from './auth/PatientForm'
+export { default as DoctorForm } from './auth/DoctorForm'
 
 // dashboard layout components
 export { default as DashNav } from './dashboard/layout/DashNav'

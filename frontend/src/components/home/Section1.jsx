@@ -11,7 +11,7 @@ const Section1 = () => {
   }
 
   return (
-    <section className='overflow-hidden'>
+    <section>
       <div className='grid grid-cols-2 mt-10 p-20 mb-20'>
         <motion.div
           className='p-5 relative bottom-20'
@@ -25,9 +25,10 @@ const Section1 = () => {
         >
           <Image
             src='/section1.svg'
-            objectFit='contain'
+            alt='Graphic'
             width={500}
             height={500}
+            priority
           />
         </motion.div>
 
@@ -64,7 +65,7 @@ const Section1 = () => {
       </div>
 
       {/* wave animations */}
-      <div className='hidden md:block -hue-rotate-15 absolute -bottom-32 left-0 w-full h-20 bg-transparent -z-10'>
+      <div className='hidden md:block -hue-rotate-15 absolute -bottom-32 left-0 w-full h-20 bg-transparent overflow-x-clip -z-10'>
         <div className='wave -hue-rotate-15' />
         <div className='wave -hue-rotate-45' />
         <div className='wave rotate-90 relative top-40' />

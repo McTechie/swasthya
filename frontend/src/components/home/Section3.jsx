@@ -25,9 +25,10 @@ const Section3 = () => {
         >
           <Image
             src='/section3.svg'
+            alt='Graphic'
             width={550}
             height={550}
-            className='shadow-lg border-2'
+            priority
           />
         </motion.div>
 

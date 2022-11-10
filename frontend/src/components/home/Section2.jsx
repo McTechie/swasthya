@@ -56,7 +56,13 @@ const Section2 = () => {
               transition: { duration: 1 }
             }}
           >
-            <Image src='/section2.svg' width={550} height={550} />
+            <Image
+              src='/section2.svg'
+              alt='Graphic'
+              width={550}
+              height={550}
+              priority
+            />
           </motion.div>
         </div>
       </div>

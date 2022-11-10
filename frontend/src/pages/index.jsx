@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Navbar, Section1, Section2, Section3, Footer } from '../components'
 
-export default function Home() {
+const HomePage = () => {
   return (
     <div>
       <Head>
@@ -25,3 +25,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default HomePage

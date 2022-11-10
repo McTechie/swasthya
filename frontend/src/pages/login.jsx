@@ -2,35 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { LoginForm } from '../components'
 
-export default function Login() {
-
-  // TODO: Registration Form
-  /** 
-   * PATIENT FORM
-   * ----------------
-   * Title
-   * First Name
-   * Middle Name
-   * Last Name
-   * DOB
-   * Gender
-   * Phone
-   * Email
-   * Complete Address
-   * City
-   * State
-   * Pincode
-   * ID Proof
-   * -----------------
-   * Ailment
-     * Name
-     * Duration
-     * Medications
-       * Name
-       * Dosage
-     * Reports
-   */
-
+const LoginPage = () => {
   /** 
    * DOCTOR FORM
    * ----------------
@@ -78,3 +50,5 @@ export default function Login() {
     </div>
   )
 }
+
+export default LoginPage

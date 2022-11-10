@@ -96,7 +96,7 @@ const IdentityProfile = () => {
       <section className='grid grid-cols-2 items-center place-items-center my-10'>
         <div className='overflow-hidden bg-teal-600 w-96 h-96 relative'>
           <Image
-            src='/dummy.svg'
+            src='/login--signin/doctor.svg'
             alt='Profile'
             layout='fill'
             objectFit='contain'
