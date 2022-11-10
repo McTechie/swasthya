@@ -32,5 +32,7 @@ module.exports = {
     'unicorn/filename-case': 'off',
     'unicorn/no-empty-file': 'off',
     'quotes': [2, 'single'],
+    'unicorn/consistent-function-scoping': 'off',
+    'unicorn/no-nested-ternary': 'off',
   }
 }

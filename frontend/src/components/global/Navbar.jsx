@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { ArrowRightCircleIcon } from '@heroicons/react/20/solid'
 
 const Navbar = ({ hideLinks }) => {
-  const router = useRouter()
+  // const router = useRouter()
 
   return (
     <nav className='fixed top-0 z-50 w-full flex py-3 px-6 bg-white bg-opacity-20 backdrop-blur-sm justify-between items-center shadow-md'>

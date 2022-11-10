@@ -7,9 +7,7 @@ const DashboardLayout = ({ children }) => {
 
       <main className='w-full flex max-w-6xl'>
         <SidebarNav />
-        <div className='flex-1'>
-          {children}
-        </div>
+        <div className='flex-1'>{children}</div>
       </main>
 
       <InfoBot />

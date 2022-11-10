@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { LoginForm } from '../components'
 
 const LoginPage = () => {
-  /** 
+  /**
    * DOCTOR FORM
    * ----------------
    * First Name
@@ -21,9 +21,9 @@ const LoginPage = () => {
    * Degree / Certification Proof
    * Accolades
    * Practicing Centres / Institutes
-     * Name
-     * Location
-     * Visiting Hours
+   * Name
+   * Location
+   * Visiting Hours
    */
 
   return (

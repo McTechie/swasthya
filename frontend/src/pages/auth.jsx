@@ -1,17 +1,21 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Navbar, PatientForm, DoctorForm } from '../components'
+import axios from 'axios'
 
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowLeftCircleIcon,
+  ArrowRightCircleIcon
+} from '@heroicons/react/24/outline'
 
 const SignupPage = () => {
   // user states
   const [userRole, setUserRole] = useState('patient')
   const [patientFormStep, setPatientFormStep] = useState(1)
-  const [doctorFormStep, setDoctorFormStep] = useState(1)
-  
+  // const [doctorFormStep, setDoctorFormStep] = useState(1)
+
   // id proof upload states
-  const [fileUploadStatus, setFileUploadStatus] = useState(100)
+  const [, setFileUploadStatus] = useState(100)
   const [fileName, setFileName] = useState('')
   const [fileKey, setFileKey] = useState(Date.now())
   const [fileSize, setFileSize] = useState(0)
@@ -22,9 +26,13 @@ const SignupPage = () => {
   // const [formSubmissionStatus, setFormSubmissionStatus] = useState(100)
   // const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
 
-  const handlePrevPatientFormStep = () => {
+  const handlePreviousPatientFormStep = () => {
     setPatientFormStep(patientFormStep => patientFormStep - 1)
   }
 
@@ -38,7 +46,7 @@ const SignupPage = () => {
     setFileSize(0)
   }
 
-  const handleFileUpload = async (event) => {
+  const handleFileUpload = async event => {
     setFileNotUploaded(false)
 
     const url = process.env.NEXT_PUBLIC_API_ENDPOINT_ID_UPLOAD
@@ -46,10 +54,10 @@ const SignupPage = () => {
     const file = event.target.files[0]
 
     if (file) {
-      if (file.size > 2000000) {
-        alert('Upload a file with a maximum size of 2MB')
-        return
-      }
+      // if (file.size > 2_000_000) {
+      //   alert('Upload a file with a maximum size of 2MB')
+      //   return
+      // }
 
       setFileSize(file.size)
       setFileName(file.name)
@@ -58,15 +66,17 @@ const SignupPage = () => {
       resumeProcessed.append('file', file)
 
       try {
-        const res = await axios.post(url, resumeProcessed)
-        setFileUploadStatus(res.status)
-      } catch (err) {
-        console.log(err)
+        const response = await axios.post(url, resumeProcessed)
+        setFileUploadStatus(response.status)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error)
       }
     }
   }
 
-  const submitData = (data) => {
+  const submitData = data => {
+    // eslint-disable-next-line no-console
     console.log(data)
   }
 
@@ -82,7 +92,7 @@ const SignupPage = () => {
           <select
             id='userRole'
             className='w-full register-form-input focus:ring-0'
-            onChange={(e) => setUserRole(e.target.value)}
+            onChange={event => setUserRole(event.target.value)}
           >
             <option value='patient'>Patient</option>
             <option value='doctor'>Doctor</option>
@@ -95,17 +105,32 @@ const SignupPage = () => {
           {userRole === 'patient' && (
             <div className='flex justify-center mb-8 pt-8'>
               <h4 className='font-bold flex items-center space-x-4'>
-                <button type='button' onClick={handlePrevPatientFormStep} className={`${patientFormStep === 1 ? 'invisible' : 'visible'}`}>
+                <button
+                  type='button'
+                  onClick={handlePreviousPatientFormStep}
+                  className={`${
+                    patientFormStep === 1 ? 'invisible' : 'visible'
+                  }`}
+                >
                   <ArrowLeftCircleIcon className='h-8 w-8' />
                 </button>
-                
-                <span>Step {patientFormStep}: {
-                  patientFormStep === 1 ? 'Personal Details' :
-                  patientFormStep === 2 ? 'Contact Details' :
-                  'Identity Proof'
-                }</span>
-                
-                <button type='button' onClick={handleNextPatientFormStep} className={`${patientFormStep === 3 ? 'invisible' : 'visible'}`}>
+
+                <span>
+                  Step {patientFormStep}:{' '}
+                  {patientFormStep === 1
+                    ? 'Personal Details'
+                    : patientFormStep === 2
+                    ? 'Contact Details'
+                    : 'Identity Proof'}
+                </span>
+
+                <button
+                  type='button'
+                  onClick={handleNextPatientFormStep}
+                  className={`${
+                    patientFormStep === 3 ? 'invisible' : 'visible'
+                  }`}
+                >
                   <ArrowRightCircleIcon className='h-8 w-8' />
                 </button>
               </h4>
@@ -125,10 +150,7 @@ const SignupPage = () => {
               fileNotUploaded={fileNotUploaded}
             />
           ) : (
-            <DoctorForm
-              register={register}
-              errors={errors}
-            />
+            <DoctorForm register={register} errors={errors} />
           )}
         </form>
       </main>
