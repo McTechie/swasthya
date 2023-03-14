@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .animate {
+    @apply duration-300 transition-all ease-in-out;
+  }
+
+  .scale-on-hover {
+    @apply hover:scale-105 animate;
+  }
+  
+  .scale-on-hover-sm {
+    @apply hover:scale-[1.025] animate;
+  }
+  
+  .nav-link {
+    @apply cursor-pointer hover:-translate-y-[2px] hover:text-indigo-600 animate p-3 text-sm hidden md:block;
+  }
+
+  .section-btn {
+    @apply text-white text-sm bg-indigo-500 py-3 px-4 mx-2 mt-10 rounded-full shadow-md hover:-translate-x-1 shadow-indigo-300 hover:shadow-indigo-400 scale-on-hover-sm flex space-x-3;
+  }
+
+  .disabled-btn {
+    @apply disabled:bg-gray-500 disabled:scale-100 disabled:shadow-gray-300;
+  }
+
+  .login-input {
+    @apply bg-white border-indigo-500 border text-lg rounded-tr-xl rounded-bl-xl text-indigo-700 placeholder:opacity-70 placeholder:italic placeholder:text-indigo-700 focus:ring-indigo-500 focus:outline-none focus:ring-[1.1px] p-2;
+  }
+
+  .login-input-error {
+    @apply bg-white border-rose-500 border text-lg rounded-tr-xl rounded-bl-xl text-indigo-700 placeholder:opacity-70 placeholder:italic placeholder:text-indigo-700 focus:ring-rose-500 focus:outline-none focus:ring-[1.1px] p-2;
+  }
+
+  .table-data {
+    @apply p-2 font-semibold text-xl text-gray-500 
+  }
+
+  .form-input {
+    @apply px-4 py-3 border-4 rounded-lg border-indigo-300 focus:outline-none
+  }
+
+  .table-header-row {
+    @apply bg-indigo-100;
+  }
+
+  .table-header-row th {
+    @apply font-semibold py-3;
+  }
+
+  .table-body-row {
+    @apply bg-white text-gray-500 even:bg-gray-200 hover:text-white hover:bg-orange-300 cursor-pointer animate;
+  }
+
+  .table-body-row td {
+    @apply py-4 text-sm;
+  }
+}
