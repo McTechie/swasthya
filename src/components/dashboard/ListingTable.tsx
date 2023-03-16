@@ -1,97 +1,14 @@
-// named imports
-import { useRouter } from 'next/router'
-
 // default imports
+import { ArrowUpRightIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import CsvDownloadButton from 'react-json-to-csv'
 
 interface ListingTableProps {
   appointments: Appointment[]
   userDataLoading: boolean
+  handleShowAppointmentDetails: (appointment: Appointment) => void
 }
 
-const ListingTable = ({ appointments, userDataLoading }: ListingTableProps) => {
-  const router = useRouter()
-
-  // const [filteredAppointments, setFilteredAppointments] = useState<AppointmentListItem[]>([
-  //   {
-  //     id: '1',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. John Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '2',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. Mohn Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '3',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. John Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '4',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. John Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '5',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. Mohn Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '6',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. John Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '7',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. John Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '8',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. Mohn Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  //   {
-  //     id: '9',
-  //     providerId: '0x863841449a5bB0011B37B5e94504bFFB909Adcc0',
-  //     doctor: 'Dr. John Doe',
-  //     ailment: 'Covid-19',
-  //     date: '2021-09-01',
-  //     time: '10:00 AM'
-  //   },
-  // ])
-
-  // sorting handler functions
-
-
-  // pagination handler function
-
+const ListingTable = ({ appointments, userDataLoading, handleShowAppointmentDetails }: ListingTableProps) => {
   const handlePayment = async (e: React.MouseEvent<HTMLButtonElement>, sender: string, receiver: string, amount: number) => {
     e.stopPropagation()
 
@@ -109,12 +26,13 @@ const ListingTable = ({ appointments, userDataLoading }: ListingTableProps) => {
     ]
 
     try {
-      const result = await window.ethereum?.request({
-        method: 'eth_sendTransaction',
-        params
-      })
+      // const result = await window.ethereum?.request({
+      //   method: 'eth_sendTransaction',
+      //   params
+      // })
 
-      console.log(result)
+      // console.log(result)
+      console.log('Payment Successful')
     } catch (error) {
       console.log(error)
     }
@@ -123,63 +41,84 @@ const ListingTable = ({ appointments, userDataLoading }: ListingTableProps) => {
   return (
     <div>
       {appointments?.length > 0 && (
-        <div className='flex items-center justify-end mt-4'>
-          <div className='text-white bg-indigo-600 py-[0.65rem] px-4 mx-2 rounded-full hover:shadow-sm shadow-indigo-300 hover:bg-indigo-700 cursor-pointer'>
+        <div className='flex items-center justify-end'>
+          <div className='text-white bg-indigo-500 py-2 px-4 mx-2 text-xs font-semibold rounded-full hover:shadow-sm shadow-indigo-300 hover:bg-indigo-700 cursor-pointer animate'>
             <CsvDownloadButton data={appointments} />
           </div>
         </div>
       )}
-      <table className='w-full table-fixed text-center mt-8'>
+
+      <table className='w-full table-fixed text-center mt-4'>
         <thead>
           <tr className='table-header-row'>
-            <th className='hidden lg:block'>
-              Provider ID
+            <th>
+              Doctor Name
             </th>
             <th>
-              Doctor
+              Location
             </th>
-            <th className='hidden lg:block'>
+            <th className='hidden md:table-cell'>
               Ailment
             </th>
-            <th>
+            <th className='hidden md:table-cell'>
               Date
             </th>
-            <th className='hidden lg:block'>
+            <th className='hidden md:table-cell'>
               Time
             </th>
             <th>
-              Pay Provider
+              Fee Payment
+            </th>
+            <th>
+              Details
             </th>
           </tr>
         </thead>
         <tbody>
           {/* in case of appointments data available */}
-          {appointments?.map((appointment, index) => (
+          {appointments?.map(appointment => (
             <tr
-              key={appointment.patientId + '_' + index}
+              key={appointment.appointmentId}
               className='table-body-row'
             >
-              <td className='hidden lg:inline-block mt-2'>
-                {appointment.providerId.substring(0, 6)}.....{appointment.providerId.substring(appointment.providerId.length - 6, appointment.providerId.length)}
-              </td>
               <td>
                 {appointment.doctor}
               </td>
-              <td className='hidden lg:inline-block mt-2'>
+              <td>
+                {'Mumbai'}
+              </td>
+              <td className='hidden md:table-cell'>
                 {appointment.ailment}
               </td>
-              <td>
+              <td className='hidden md:table-cell'>
                 {appointment.date}
               </td>
-              <td className='hidden lg:inline-block mt-2'>
+              <td className='hidden md:table-cell'>
                 {appointment.time}
               </td>
               <td>
+                <p>
+                  &#8377; {appointment.consultationFee}
+                </p>
                 <button
                   onClick={(e) => handlePayment(e, appointment.patientId, appointment.providerId, appointment.consultationFee)}
-                  className='text-white text-sm bg-emerald-600 py-[0.65rem] px-4 mx-2 rounded-full hover:shadow-sm shadow-emerald-300 hover:bg-emerald-700 cursor-pointer'
+                  className='text-xs text-indigo-500 space-x-1 hover:underline'
                 >
-                  Pay Now
+                  <span>
+                    Pay Now
+                  </span>
+                  <ArrowUpRightIcon className='w-3 h-3 inline-block mb-1' />
+                </button>
+              </td>
+              <td>
+                <button
+                  onClick={() => handleShowAppointmentDetails(appointment)}
+                  className='text-xs text-indigo-500 space-x-1 hover:underline'
+                >
+                  <span>
+                    View Details
+                  </span>
+                  <InformationCircleIcon className='w-4 h-4 inline-block mb-1' />
                 </button>
               </td>
             </tr>

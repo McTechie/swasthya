@@ -1,7 +1,7 @@
 {
     "theme_color": "#059669",
-    "background_color": "#FFFFFF",
-    "display": "browser",
+    "background_color": "#ffffff",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Swasthya",

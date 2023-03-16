@@ -19,10 +19,13 @@
     "next": "latest",
     "next-pwa": "^5.6.0",
     "openai": "^3.2.1",
+    "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
     "react-json-to-csv": "^1.2.0",
+    "react-qr-reader": "3.0.0-beta-1",
+    "react-qr-scanner": "1.0.0-alpha.11",
     "react-usestateref": "^1.0.8"
   },
   "devDependencies": {

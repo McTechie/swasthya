@@ -64,6 +64,7 @@ const Login: NextPage = () => {
         <aside className='bg-gradient-to-br from-emerald-600 to-indigo-400 flex flex-col items-center justify-center py-2 lg:min-h-screen lg:col-span-4'>
           <div className='bg-gradient-to-br from-amber-400 to-rose-400 px-4 py-3 rounded-xl'>
             <Image
+              priority
               src='/logo.png'
               alt='Swasthya Access NFT'
               width={200}
@@ -90,7 +91,7 @@ const Login: NextPage = () => {
               {hasSwasthyaNft ? (
                 <Link
                   href='/dashboard'
-                  className='rounded-full bg-emerald-600 hover:bg-emerald-700 animate text-white px-4 py-3 text-xs font-bold lg:px-5 lg:text-sm flex items-center space-x-1'
+                  className='rounded-full bg-emerald-600 hover:bg-emerald-700 animate text-white px-4 py-3 text-xs font-bold lg:text-sm flex items-center space-x-1'
                 >
                   <p>Dashboard</p>
                   <ArrowUpRightIcon className='h-4 w-4 ml-1' />
@@ -130,15 +131,15 @@ const Login: NextPage = () => {
                   name='tokenIndex'
                   id='tokenIndex'
                   onChange={(e) => setCurrentIndex(parseInt(e.target.value))}
-                  className='login-input'
+                  className='login-input w-52'
                 >
                   <option value={0}>Patient</option>
-                  <option value={1}>Healthcare Provider</option>
+                  <option value={1}>Doctor</option>
                 </select>
               </div>
 
               <Image
-                src={currentIndex === 0 ? '/cb_patient.png' : '/cb_admin.png'}
+                src={currentIndex === 0 ? '/patient.png' : '/doctor.png'}
                 alt='Swasthya Patient NFT'
                 width={200}
                 height={200}

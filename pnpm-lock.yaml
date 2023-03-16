@@ -21,10 +21,13 @@ specifiers:
   next-pwa: ^5.6.0
   openai: ^3.2.1
   postcss: ^8.4.18
+  qrcode.react: ^3.1.0
   react: 18.2.0
   react-dom: 18.2.0
   react-hook-form: ^7.43.5
   react-json-to-csv: ^1.2.0
+  react-qr-reader: 3.0.0-beta-1
+  react-qr-scanner: 1.0.0-alpha.11
   react-usestateref: ^1.0.8
   tailwindcss: ^3.2.4
   typescript: 4.9.4
@@ -42,10 +45,13 @@ dependencies:
   next: 13.2.4_6m24vuloj5ihw4zc5lbsktc4fu
   next-pwa: 5.6.0_pfm2lebegknrgbmudekkrt7r6y
   openai: 3.2.1
+  qrcode.react: 3.1.0_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.5_react@18.2.0
   react-json-to-csv: 1.2.0
+  react-qr-reader: 3.0.0-beta-1_biqbaboplfbrettd7655fr4n2y
+  react-qr-scanner: 1.0.0-alpha.11_biqbaboplfbrettd7655fr4n2y
   react-usestateref: 1.0.8_react@18.2.0
 
 devDependencies:
@@ -3361,6 +3367,40 @@ packages:
     dependencies:
       csstype: 3.1.1
     dev: false
+
+  /@zxing/browser/0.0.7_@zxing+library@0.18.6:
+    resolution: {integrity: sha512-AepzMgDnD6EjxewqmXpHJsi4S3Gw9ilZJLIbTf6fWuWySEcHBodnGu3p7FWlgq1Sd5QyfPhTum5z3CBkkhMVng==}
+    peerDependencies:
+      '@zxing/library': ^0.18.3
+    dependencies:
+      '@zxing/library': 0.18.6
+    optionalDependencies:
+      '@zxing/text-encoding': 0.9.0
+    dev: false
+
+  /@zxing/library/0.18.6:
+    resolution: {integrity: sha512-bulZ9JHoLFd9W36pi+7e7DnEYNJhljYjZ1UTsKPOoLMU3qtC+REHITeCRNx40zTRJZx18W5TBRXt5pq2Uopjsw==}
+    engines: {node: '>= 10.4.0'}
+    dependencies:
+      ts-custom-error: 3.3.1
+    optionalDependencies:
+      '@zxing/text-encoding': 0.9.0
+    dev: false
+
+  /@zxing/library/0.19.2:
+    resolution: {integrity: sha512-0aCQIbGXsDHcBuRYuZRZfJeLRYiPfdLxIlh5bY7k+k2bkxFwzla+75VyFi1rnjU5hqaZogdSH+Dw013YDsQOjg==}
+    engines: {node: '>= 10.4.0'}
+    dependencies:
+      ts-custom-error: 3.3.1
+    optionalDependencies:
+      '@zxing/text-encoding': 0.9.0
+    dev: false
+
+  /@zxing/text-encoding/0.9.0:
+    resolution: {integrity: sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /JSONStream/1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
@@ -6933,7 +6973,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /protobufjs/6.11.3:
     resolution: {integrity: sha512-xL96WDdCZYdU7Slin569tFX712BxsxslWwAfAhCYjQKGTq7dAU91Lomy6nLLhh/dyGhk/YH4TwTSRxTzhuHyZg==}
@@ -6966,6 +7005,14 @@ packages:
   /punycode/2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
+
+  /qrcode.react/3.1.0_react@18.2.0:
+    resolution: {integrity: sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /qrcode/1.4.4:
     resolution: {integrity: sha512-oLzEC5+NKFou9P0bMj5+v6Z40evexeE29Z9cummZXZ9QXyMr3lphkURzxjXgPJC5azpxcshoDWV1xE46z+/c3Q==}
@@ -7061,6 +7108,31 @@ packages:
     resolution: {integrity: sha512-4yBorgPrkRQDRpbTKDq5vXIb4+CYBorwFxbYyKddmTnFlUGQb/2EOyIrSq6Elp/ygYCVKJK2IwfhEYUaDVyCpw==}
     dependencies:
       json-to-csv-export: 2.1.0
+    dev: false
+
+  /react-qr-reader/3.0.0-beta-1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5HeFH9x/BlziRYQYGK2AeWS9WiKYZtGGMs9DXy3bcySTX3C9UJL9EwcPnWw8vlf7JP4FcrAlr1SnZ5nsWLQGyw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@zxing/browser': 0.0.7_@zxing+library@0.18.6
+      '@zxing/library': 0.18.6
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      rollup: 2.79.1
+    dev: false
+
+  /react-qr-scanner/1.0.0-alpha.11_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-TdaygL+4U9iapskJgK5Ilb1Cw4wwzQ3bVpIfzzbrEsxPaEJzmjQ7VuMz8E9hBQGCU4Ee+YtgglE3byEtgtRpkA==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    dependencies:
+      '@zxing/library': 0.19.2
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-usestateref/1.0.8_react@18.2.0:
@@ -7784,6 +7856,11 @@ packages:
   /treeify/1.1.0:
     resolution: {integrity: sha512-1m4RA7xVAJrSGrrXGs0L3YTwyvBs2S8PbRHaLZAkFw7JR8oIFwYtysxlBZhYIa7xSyiYJKZ3iGrrk55cGA3i9A==}
     engines: {node: '>=0.6'}
+    dev: false
+
+  /ts-custom-error/3.3.1:
+    resolution: {integrity: sha512-5OX1tzOjxWEgsr/YEUWSuPrQ00deKLh6D7OTWcvNHm12/7QPyRh8SYpyWvA4IZv8H/+GQWQEh/kwo95Q9OVW1A==}
+    engines: {node: '>=14.0.0'}
     dev: false
 
   /tsconfig-paths/3.14.2:

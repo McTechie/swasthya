@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 // named imports
 import { useEffect, useState } from 'react'
 import { DashboardLayout } from '../layouts'
-import { ListingTable, CreateAppointment } from '../components'
+import { ListingTable, CreateAppointment, AppointmentDetails } from '../components'
 import {
   useAddress,
   useContract,
@@ -13,7 +13,6 @@ import {
 
 // default imports
 import Image from 'next/image'
-import Link from 'next/link'
 
 const Dashboard: NextPage = () => {
   // web3 auth hooks
@@ -21,6 +20,20 @@ const Dashboard: NextPage = () => {
 
   // check if user owns any ERC 1155 NFTs
   const [appointments, setAppointments] = useState<Appointment[]>([])
+  
+  // store appointment details
+  const [showAppointmentDetails, setShowAppointmentDetails] = useState<boolean>(false)
+  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
+
+  const handleShowAppointmentDetails = (appointment: Appointment) => {
+    setSelectedAppointment(appointment)
+    setShowAppointmentDetails(true)
+  }
+
+  const handleHideAppointmentDetails = () => {
+    setSelectedAppointment(null)
+    setShowAppointmentDetails(false)
+  }
 
   // fetch user access NFTs
   const { contract: accessContract } = useContract(process.env.NEXT_PUBLIC_NFT_GATING_CONTRACT)
@@ -40,10 +53,6 @@ const Dashboard: NextPage = () => {
     setAppointments(data)
   }, [ownedNFTs, userDataLoading])
 
-  if (!address || !accessNFTs) {
-    return <p>No Access...</p>
-  }
-
   if (accessDataLoading || userDataLoading) {
     return (
       <div className='flex items-center justify-center'>
@@ -57,13 +66,27 @@ const Dashboard: NextPage = () => {
     )
   }
 
+  if (!address || !accessNFTs) {
+    return <p>No Access...</p>
+  }
+
   return (
     <DashboardLayout>
-      {accessNFTs && accessNFTs[0]?.metadata.name === 'CB Patient' ? (
-        <ListingTable appointments={appointments} userDataLoading={userDataLoading} />
+      {showAppointmentDetails ? (
+        <AppointmentDetails
+          selectedAppointment={selectedAppointment}
+          handleHideAppointmentDetails={handleHideAppointmentDetails}
+        />
+      ) : accessNFTs && accessNFTs[0]?.metadata.name === 'Patient' ? (
+        <ListingTable 
+          appointments={appointments}
+          userDataLoading={userDataLoading}
+          handleShowAppointmentDetails={handleShowAppointmentDetails}
+        />
       ) : (
         <CreateAppointment />
       )}
+
     </DashboardLayout>
   )
 }

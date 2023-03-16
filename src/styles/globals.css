@@ -31,16 +31,12 @@
     @apply bg-white border-indigo-500 border text-lg rounded-tr-xl rounded-bl-xl text-indigo-700 placeholder:opacity-70 placeholder:italic placeholder:text-indigo-700 focus:ring-indigo-500 focus:outline-none focus:ring-[1.1px] p-2;
   }
 
-  .login-input-error {
-    @apply bg-white border-rose-500 border text-lg rounded-tr-xl rounded-bl-xl text-indigo-700 placeholder:opacity-70 placeholder:italic placeholder:text-indigo-700 focus:ring-rose-500 focus:outline-none focus:ring-[1.1px] p-2;
-  }
-
   .table-data {
-    @apply p-2 font-semibold text-xl text-gray-500 
+    @apply p-2 font-semibold text-xl text-gray-500;
   }
 
   .form-input {
-    @apply px-4 py-3 border-4 rounded-lg border-indigo-300 focus:outline-none
+    @apply px-4 py-3 border-4 rounded-lg border-indigo-300 focus:outline-none;
   }
 
   .table-header-row {
@@ -52,10 +48,10 @@
   }
 
   .table-body-row {
-    @apply bg-white text-gray-500 even:bg-gray-200 hover:text-white hover:bg-orange-300 cursor-pointer animate;
+    @apply bg-white text-gray-500 even:bg-gray-200 animate;
   }
 
   .table-body-row td {
-    @apply py-4 text-sm;
+    @apply py-2 text-sm;
   }
 }

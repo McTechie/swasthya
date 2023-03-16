@@ -1,13 +1,5 @@
-type AppointmentListItem = {
-  id: string;
-  providerId: string;
-  doctor: string;
-  ailment: string;
-  date: string;
-  time: string;
-}
-
 type Appointment = {
+  appointmentId: string;
   providerId: string;
   patientId: string;
   doctor: string;
