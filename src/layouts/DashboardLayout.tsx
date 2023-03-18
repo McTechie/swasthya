@@ -1,5 +1,5 @@
 // named imports
-import { ProfileInfo } from '../components'
+import { ProfileInfo, Chatbot } from '../components'
 
 // default imports
 import Head from 'next/head'
@@ -20,6 +20,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
       <main className='max-w-screen-2xl mx-auto p-4'>
         {children}
+
+        <Chatbot />
       </main>
     </div>
   )
