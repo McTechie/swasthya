@@ -15,12 +15,19 @@ import {
 import Image from 'next/image'
 
 const Dashboard: NextPage = () => {
-  // web3 auth hooks
   const address = useAddress()
 
   // check if user owns any ERC 1155 NFTs
   const [appointments, setAppointments] = useState<Appointment[]>([])
-  
+
+  // fetch user access NFTs
+  const { contract: accessContract } = useContract(process.env.NEXT_PUBLIC_NFT_GATING_CONTRACT)
+  const { data: accessNFTs, isLoading: accessDataLoading } = useOwnedNFTs(accessContract, address)
+
+  // fetch user appointment NFTs
+  const { contract } = useContract(process.env.NEXT_PUBLIC_COLLECTION_CONTRACT)
+  const { data: ownedNFTs, isLoading: userDataLoading } = useOwnedNFTs(contract, address)
+
   // store appointment details
   const [showAppointmentDetails, setShowAppointmentDetails] = useState<boolean>(false)
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
@@ -34,14 +41,6 @@ const Dashboard: NextPage = () => {
     setSelectedAppointment(null)
     setShowAppointmentDetails(false)
   }
-
-  // fetch user access NFTs
-  const { contract: accessContract } = useContract(process.env.NEXT_PUBLIC_NFT_GATING_CONTRACT)
-  const { data: accessNFTs, isLoading: accessDataLoading } = useOwnedNFTs(accessContract, address)
-
-  // fetch user appointment NFTs
-  const { contract } = useContract(process.env.NEXT_PUBLIC_COLLECTION_CONTRACT)
-  const { data: ownedNFTs, isLoading: userDataLoading } = useOwnedNFTs(contract, address)
 
   useEffect(() => {
     if (userDataLoading) return
@@ -77,14 +76,12 @@ const Dashboard: NextPage = () => {
           selectedAppointment={selectedAppointment}
           handleHideAppointmentDetails={handleHideAppointmentDetails}
         />
-      ) : accessNFTs && accessNFTs[0]?.metadata.name === 'Patient' ? (
-        <ListingTable 
+      ) : (
+        <ListingTable
           appointments={appointments}
           userDataLoading={userDataLoading}
           handleShowAppointmentDetails={handleShowAppointmentDetails}
         />
-      ) : (
-        <CreateAppointment />
       )}
 
     </DashboardLayout>

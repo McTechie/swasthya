@@ -1,5 +1,7 @@
-// default imports
+// named imports
 import { ArrowUpRightIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
+
+// default imports
 import CsvDownloadButton from 'react-json-to-csv'
 
 interface ListingTableProps {
@@ -12,27 +14,10 @@ const ListingTable = ({ appointments, userDataLoading, handleShowAppointmentDeta
   const handlePayment = async (e: React.MouseEvent<HTMLButtonElement>, sender: string, receiver: string, amount: number) => {
     e.stopPropagation()
 
-    const MATIC_TO_MUBAI = amount / 83.05
-    const FINAL_AMT = 1000000000000000000 * MATIC_TO_MUBAI
-
-    console.log(sender, receiver, FINAL_AMT)
-
-    const params = [
-      {
-        from: sender,
-        to: receiver,
-        value: Number(FINAL_AMT).toString(16)
-      }
-    ]
-
     try {
-      // const result = await window.ethereum?.request({
-      //   method: 'eth_sendTransaction',
-      //   params
-      // })
-
-      // console.log(result)
-      console.log('Payment Successful')
+      console.log('Payment From: ', sender)
+      console.log('Payment To: ', receiver)
+      console.log('Payment Amount (rupees): ', amount)
     } catch (error) {
       console.log(error)
     }
@@ -127,7 +112,12 @@ const ListingTable = ({ appointments, userDataLoading, handleShowAppointmentDeta
           {/* in case of no data */}
           {appointments?.length === 0 && (
             <tr>
-              <td colSpan={5}>
+              <td className='md:hidden' colSpan={4}>
+                <p className='text-center text-gray-500 mt-4'>
+                  {userDataLoading ? 'Loading...' : 'No appointments found...'}
+                </p>
+              </td>
+              <td className='hidden md:table-cell' colSpan={7}>
                 <p className='text-center text-gray-500 mt-4'>
                   {userDataLoading ? 'Loading...' : 'No appointments found...'}
                 </p>

@@ -26,6 +26,7 @@ type FormValues = {
 }
 
 const CreateAppointment: NextPage = () => {
+  // scanned patient id
   const [patientId, setPatientId] = useState<string>('')
 
   // react hook form
@@ -61,7 +62,7 @@ const CreateAppointment: NextPage = () => {
 
   return (
     <section className='my-6'>
-      {patientId === '' ? (
+      {patientId !== '' ? (
         <>
           <h3 className={`text-center text-2xl mt-4 ${(address || !isMinting) ? 'mb-8' : 'mb-0'}`}>
             Scan Patient&apos;s QR
@@ -163,12 +164,12 @@ const CreateAppointment: NextPage = () => {
 
             <div>
               <label htmlFor='symptoms' hidden>
-                Symptoms
+                Symptoms &#40;separated by commas&#41;
               </label>
               <input
                 type='text'
                 id='symptoms'
-                placeholder='Symptoms'
+                placeholder='Symptoms &#40;comma-separated&#41;'
                 {...register('symptoms', { required: true })}
                 className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
               />
