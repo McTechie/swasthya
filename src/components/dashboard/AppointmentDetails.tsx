@@ -21,7 +21,7 @@ const AppointmentDetails = ({ selectedAppointment, handleHideAppointmentDetails 
   } = selectedAppointment!
 
   return (
-    <section>
+    <section className='p-2'>
       <button
         onClick={() => handleHideAppointmentDetails()}
         className='flex items-center space-x-1 group md:hover:text-indigo-600'
@@ -30,7 +30,7 @@ const AppointmentDetails = ({ selectedAppointment, handleHideAppointmentDetails 
         <span className='md:group-hover:pl-[0.15rem] animate'>Back</span>
       </button>
 
-      <h2 className='text-2xl text-center'>
+      <h2 className='text-2xl scale-[1.2] mt-4 text-center'>
         Appointment Details
       </h2>
 
@@ -38,11 +38,6 @@ const AppointmentDetails = ({ selectedAppointment, handleHideAppointmentDetails 
         <div className='grid grid-cols-4 space-x-1'>
           <p className='col-span-1 px-3 py-2 bg-indigo-100 font-semibold'>Doctor Name:</p>
           <p className='col-span-3 px-3 py-2 bg-emerald-100'>{doctor}</p>
-        </div>
-
-        <div className='grid grid-cols-4 space-x-1'>
-          <p className='col-span-1 px-3 py-2 bg-indigo-100 font-semibold'>Patient Name:</p>
-          <p className='col-span-3 px-3 py-2 bg-emerald-100'>{patient}</p>
         </div>
 
         <div className='grid grid-cols-4 space-x-1'>

@@ -9,11 +9,13 @@ specifiers:
   '@thirdweb-dev/sdk': ^3.10.3
   '@thirdweb-dev/storage': ^1.1.0
   '@types/node': 18.11.3
+  '@types/nodemailer': ^6.4.7
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@types/react-json-to-csv': ^1.2.0
   '@zxing/browser': ^0.1.1
   autoprefixer: ^10.4.12
+  dotenv: ^16.0.3
   eslint: 8.35.0
   eslint-config-next: 13.2.4
   ethers: '5'
@@ -21,12 +23,14 @@ specifiers:
   moralis: ^2.14.3
   next: latest
   next-pwa: ^5.6.0
+  nodemailer: ^6.9.1
   openai: ^3.2.1
   postcss: ^8.4.18
   qrcode.react: ^3.1.0
   react: 18.2.0
   react-dom: 18.2.0
   react-hook-form: ^7.43.5
+  react-hot-toast: ^2.4.0
   react-json-to-csv: ^1.2.0
   react-pdf: ^6.2.2
   tailwindcss: ^3.2.4
@@ -41,21 +45,25 @@ dependencies:
   '@thirdweb-dev/sdk': 3.10.3_ethers@5.7.2
   '@thirdweb-dev/storage': 1.1.0
   '@zxing/browser': 0.1.1_@zxing+library@0.19.2
+  dotenv: 16.0.3
   ethers: 5.7.2
   framer-motion: 10.6.0_biqbaboplfbrettd7655fr4n2y
   moralis: 2.16.1
   next: 13.2.4_hrdbe576m4w26u2yfpqpvbxyky
   next-pwa: 5.6.0_npbatwryqg4hkulzc6tj7cqewy
+  nodemailer: 6.9.1
   openai: 3.2.1
   qrcode.react: 3.1.0_react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.7_react@18.2.0
+  react-hot-toast: 2.4.0_owo25xnefcwdq3zjgtohz6dbju
   react-json-to-csv: 1.2.0
   react-pdf: 6.2.2_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@types/node': 18.11.3
+  '@types/nodemailer': 6.4.7
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@types/react-json-to-csv': 1.2.0
@@ -3010,6 +3018,12 @@ packages:
   /@types/node/18.11.3:
     resolution: {integrity: sha512-fNjDQzzOsZeKZu5NATgXUPsaFaTxeRgFXoosrHivTl8RGeV733OLawXsGfEk9a8/tySyZUyiZ6E8LcjPFZ2y1A==}
 
+  /@types/nodemailer/6.4.7:
+    resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
+    dependencies:
+      '@types/node': 18.11.3
+    dev: true
+
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: false
@@ -4597,6 +4611,11 @@ packages:
     deprecated: dommatrix is no longer maintained. Please use @thednp/dommatrix.
     dev: false
 
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
+
   /eip1193-provider/1.0.1:
     resolution: {integrity: sha512-kSuqwQ26d7CzuS/t3yRXo2Su2cVH0QfvyKbr2H7Be7O5YDyIq4hQGCNTo5wRdP07bt+E2R/8nPCzey4ojBHf7g==}
     dependencies:
@@ -5663,6 +5682,14 @@ packages:
   /globrex/0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
+
+  /goober/2.1.12_csstype@3.1.1:
+    resolution: {integrity: sha512-yXHAvO08FU1JgTXX6Zn6sYCUFfB/OJSX8HHjDSgerZHZmFKAb08cykp5LBw5QnmyMcZyPRMqkdyHUSSzge788Q==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dependencies:
+      csstype: 3.1.1
+    dev: false
 
   /gopd/1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
@@ -6805,6 +6832,11 @@ packages:
   /node-releases/2.0.10:
     resolution: {integrity: sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==}
 
+  /nodemailer/6.9.1:
+    resolution: {integrity: sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
@@ -7355,6 +7387,20 @@ packages:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-hot-toast/2.4.0_owo25xnefcwdq3zjgtohz6dbju:
+    resolution: {integrity: sha512-qnnVbXropKuwUpriVVosgo8QrB+IaPJCpL8oBI6Ov84uvHZ5QQcTp2qg6ku2wNfgJl6rlQXJIQU5q+5lmPOutA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.12_csstype@3.1.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-is/16.13.1:

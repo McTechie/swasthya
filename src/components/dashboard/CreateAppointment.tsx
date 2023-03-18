@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { BrowserQRCodeReader } from '@zxing/browser'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast, Toaster } from 'react-hot-toast'
 import {
   useAddress,
   useContract,
@@ -18,6 +19,8 @@ import Image from 'next/image'
 type FormValues = {
   doctor: string;
   patient: string;
+  email: string;
+  location: string;
   date: string;
   time: string;
   ailment: string;
@@ -32,6 +35,9 @@ const CreateAppointment: NextPage = () => {
   // next router
   const router = useRouter()
 
+  // loading states
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   // scanned patient id
   const [patientId, setPatientId] = useState<string>('')
 
@@ -45,6 +51,15 @@ const CreateAppointment: NextPage = () => {
   const { mutateAsync: mintNft, isLoading: isMinting } = useMintNFT(contract)
 
   const handleMintNFT: SubmitHandler<FormValues> = async (data) => {
+    setIsLoading(true)
+
+    const notification = toast.loading('Creating appointment...', {
+      style: {
+        background: '#059669',
+        color: '#fff',
+      }
+    })
+
     if (address) {
       const doctorMetadata = {
         name: `Appointment_${address}`,
@@ -67,6 +82,7 @@ const CreateAppointment: NextPage = () => {
       }
 
       try {
+        // Step 1: Mint NFTs for both the doctor and patient
         await mintNft({
           to: patientId,
           metadata: patientMetadata,
@@ -76,11 +92,40 @@ const CreateAppointment: NextPage = () => {
           to: address,
           metadata: doctorMetadata,
         })
+    
+        // Step 2: Send an email to the patient
+        const response = await fetch('/api/mail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            doctor: data.doctor,
+            patient: data.patient,
+            email: data.email,
+            date: data.date,
+          }),
+        })
 
-        alert('Appointment created successfully!')
-        reset()
-        setPatientId('')
-        router.push('/dashboard')
+        if (response.status === 200) {
+          setIsLoading(false)
+          
+          toast.success('Appointment created!', {
+            id: notification,
+            duration: 5000,
+          })
+
+          reset()
+          setPatientId('')
+          router.push('/dashboard')
+        } else {
+          setIsLoading(false)
+          
+          toast.error('Something went wrong, please try again later.', {
+            id: notification,
+            duration: 5000,
+          })
+        }
       } catch (error) {
         console.log('error', error)
       }
@@ -99,19 +144,21 @@ const CreateAppointment: NextPage = () => {
 
   return (
     <section className='my-6'>
+      <Toaster position='bottom-right' />
+
       {patientId === '' ? (
         <>
           <h3 className={`text-center text-2xl mt-4 ${(address || !isMinting) ? 'mb-8' : 'mb-0'}`}>
             Scan Patient&apos;s QR
           </h3>
 
-          <div className='max-w-3xl'>
+          <div className='max-w-screen-lg mx-auto'>
             <video id='video' />
           </div>
         </>
       ) : (
         <>
-          <h3 className={`text-center text-2xl mt-4 ${(address || !isMinting) ? 'mb-8' : 'mb-0'}`}>
+          <h3 className={`text-center text-2xl mt-4 ${(address || !isMinting) ? 'mb-4' : 'mb-0'}`}>
             Enter Appointment Details
           </h3>
 
@@ -142,7 +189,7 @@ const CreateAppointment: NextPage = () => {
                 className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
               />
 
-              {errors.date && (
+              {errors.doctor && (
                 <p className='text-red-500 text-sm'>
                   Please enter your name.
                 </p>
@@ -161,9 +208,47 @@ const CreateAppointment: NextPage = () => {
                 className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
               />
 
-              {errors.date && (
+              {errors.patient && (
                 <p className='text-red-500 text-sm'>
                   Please enter patient&apos;s name.
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor='email' hidden>
+                Patient&apos;s Email address
+              </label>
+              <input
+                type='text'
+                id='email'
+                placeholder='Patient&apos;s email address'
+                {...register('email', { required: true })}
+                className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
+              />
+
+              {errors.date && (
+                <p className='text-red-500 text-sm'>
+                  Please enter patient&apos;s email.
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor='location' hidden>
+                Location
+              </label>
+              <input
+                type='text'
+                id='location'
+                placeholder='Location'
+                {...register('location', { required: true })}
+                className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
+              />
+
+              {errors.date && (
+                <p className='text-red-500 text-sm'>
+                  Please enter the location.
                 </p>
               )}
             </div>
