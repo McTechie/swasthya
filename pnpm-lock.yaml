@@ -26,6 +26,7 @@ specifiers:
   react-dom: 18.2.0
   react-hook-form: ^7.43.5
   react-json-to-csv: ^1.2.0
+  react-qr-code: ^2.0.11
   react-qr-reader: 3.0.0-beta-1
   react-qr-scanner: 1.0.0-alpha.11
   react-usestateref: ^1.0.8
@@ -50,6 +51,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.5_react@18.2.0
   react-json-to-csv: 1.2.0
+  react-qr-code: 2.0.11_react@18.2.0
   react-qr-reader: 3.0.0-beta-1_biqbaboplfbrettd7655fr4n2y
   react-qr-scanner: 1.0.0-alpha.11_biqbaboplfbrettd7655fr4n2y
   react-usestateref: 1.0.8_react@18.2.0
@@ -7006,6 +7008,10 @@ packages:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
 
+  /qr.js/0.0.0:
+    resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
+    dev: false
+
   /qrcode.react/3.1.0_react@18.2.0:
     resolution: {integrity: sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==}
     peerDependencies:
@@ -7108,6 +7114,20 @@ packages:
     resolution: {integrity: sha512-4yBorgPrkRQDRpbTKDq5vXIb4+CYBorwFxbYyKddmTnFlUGQb/2EOyIrSq6Elp/ygYCVKJK2IwfhEYUaDVyCpw==}
     dependencies:
       json-to-csv-export: 2.1.0
+    dev: false
+
+  /react-qr-code/2.0.11_react@18.2.0:
+    resolution: {integrity: sha512-P7mvVM5vk9NjGdHMt4Z0KWeeJYwRAtonHTghZT2r+AASinLUUKQ9wfsGH2lPKsT++gps7hXmaiMGRvwTDEL9OA==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      react-native-svg:
+        optional: true
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 18.2.0
     dev: false
 
   /react-qr-reader/3.0.0-beta-1_biqbaboplfbrettd7655fr4n2y:
