@@ -52,6 +52,8 @@ const Dashboard: NextPage = () => {
     setAppointments(data)
   }, [ownedNFTs, userDataLoading])
 
+  if (!address) return <p>Not connected...</p>
+
   if (accessDataLoading || userDataLoading) {
     return (
       <div className='flex items-center justify-center'>
@@ -64,8 +66,8 @@ const Dashboard: NextPage = () => {
       </div>
     )
   }
-
-  if (!address || !accessNFTs) {
+  
+  if (!accessNFTs) {
     return <p>No Access...</p>
   }
 

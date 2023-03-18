@@ -46,20 +46,35 @@ const CreateAppointment: NextPage = () => {
 
   const handleMintNFT: SubmitHandler<FormValues> = async (data) => {
     if (address) {
-      const metadata = {
+      const doctorMetadata = {
         name: `Appointment_${address}`,
-        properties: data,
+        properties: {
+          ...data,
+          appointmentId: Date.now(),
+          patientId: patientId,
+          doctorId: address,
+        },
+      }
+
+      const patientMetadata = {
+        name: `Appointment_${patientId}`,
+        properties: {
+          ...data,
+          appointmentId: Date.now(),
+          patientId: patientId,
+          doctorId: address,
+        },
       }
 
       try {
         await mintNft({
           to: patientId,
-          metadata,
+          metadata: patientMetadata,
         })
 
         await mintNft({
           to: address,
-          metadata,
+          metadata: doctorMetadata,
         })
 
         alert('Appointment created successfully!')
@@ -255,17 +270,12 @@ const CreateAppointment: NextPage = () => {
               <input
                 multiple
                 type='file'
+                accept='.pdf'
                 id='reports'
                 placeholder='Attach a Report'
                 {...register('reports')}
                 className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
               />
-
-              {errors.reports && (
-                <p className='text-red-500 text-sm'>
-                  Please enter a consultation fee.
-                </p>
-              )}
             </div>
 
             <button
