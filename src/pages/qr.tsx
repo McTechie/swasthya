@@ -1,12 +1,12 @@
 // named imports
 import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react'
-import { DashboardLayout } from '../../layouts'
+import { QRCodeSVG } from 'qrcode.react'
+import { DashboardLayout } from '../layouts'
 
 // default imports
 import Image from 'next/image'
-import QRCode from 'react-qr-code'
 
-const DoctorQR = () => {
+const PatientQR = () => {
   const address = useAddress()
   
   const { contract: accessContract } = useContract(process.env.NEXT_PUBLIC_NFT_GATING_CONTRACT)
@@ -31,21 +31,16 @@ const DoctorQR = () => {
 
   return (
     <DashboardLayout>
-      <section className='text-center flex flex-col justify-center items-center space-y-7 mt-4'>
+      <section className='text-center flex flex-col justify-center items-center space-y-24 mt-4'>
         <p>
           Show this to your doctor so that they can verify your identity.
         </p>
-        <div className='border-4 inline-block border-emerald-700'>
-          <QRCode
-            value={address}
-            size={256}
-            bgColor='#6366f1'
-            fgColor='#ffffff'
-          />
+        <div className='scale-[2]'>
+          <QRCodeSVG value={address} />
         </div>
       </section>
     </DashboardLayout>
   )
 }
 
-export default DoctorQR
+export default PatientQR

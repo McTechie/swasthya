@@ -52,10 +52,10 @@ const ProfileInfo = () => {
         </div>
 
         {/* navbar for smaller screens */}
-        <div className='md:hidden absolute -top-4 lg:top-0 right-0 flex flex-col space-y-3 md:flex-row md:space-x-3 md:space-y-0 animate'>
+        <div className='md:hidden absolute -top-4 lg:top-0 right-0 flex flex-col space-y-3 animate'>
           {buttonsVisible ? (
             <>
-              <button className='rounded-full bg-indigo-500 hover:bg-indigo-600 animate text-white p-2 text-xs font-semibold'>
+              <button className='rounded-full bg-indigo-500 text-white p-2 text-xs font-semibold'>
                 <XMarkIcon
                   onClick={() => setButtonsVisible(false)}
                   className='h-4 w-4'
@@ -64,7 +64,7 @@ const ProfileInfo = () => {
 
               {pathname !== '/dashboard' && (
                 <Link href='/dashboard'>
-                  <button className='rounded-full bg-indigo-500 hover:bg-indigo-600 animate text-white p-2 text-xs font-semibold'>
+                  <button className='rounded-full bg-indigo-500 text-white p-2 text-xs font-semibold'>
                     <span className='hidden'>Dashboard</span>
                     <Squares2X2Icon className='w-4 h-4' />
                   </button>
@@ -73,7 +73,7 @@ const ProfileInfo = () => {
 
               {pathname !== '/create' && (
                 <Link href='/create'>
-                  <button className='rounded-full bg-indigo-500 hover:bg-indigo-600 animate text-white p-2 text-xs font-semibold'>
+                  <button className='rounded-full bg-indigo-500 text-white p-2 text-xs font-semibold'>
                     <span className='hidden'>Create Appointment</span>
                     <PencilSquareIcon className='w-4 h-4' />
                   </button>
@@ -82,7 +82,7 @@ const ProfileInfo = () => {
 
               {pathname !== '/qr' && (
                 <Link href='/qr'>
-                  <button className='rounded-full bg-indigo-500 hover:bg-indigo-600 animate text-white p-2 text-xs font-semibold'>
+                  <button className='rounded-full bg-indigo-500 text-white p-2 text-xs font-semibold'>
                     <span className='hidden'>View QR</span>
                     <QrCodeIcon className='w-4 h-4' />
                   </button>
@@ -91,7 +91,7 @@ const ProfileInfo = () => {
 
               <button
                 onClick={() => handleLogout()}
-                className='rounded-full bg-indigo-500 hover:bg-indigo-600 animate text-white p-2 text-xs font-semibold'
+                className='rounded-full bg-indigo-500 text-white p-2 text-xs font-semibold'
               >
                 <span className='hidden'>Logout</span>
                 <ArrowTopRightOnSquareIcon className='w-4 h-4' />

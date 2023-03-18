@@ -2,8 +2,9 @@
 import type { NextPage } from 'next'
 
 // named imports
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { BrowserQRCodeReader } from '@zxing/browser'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {
   useAddress,
@@ -13,10 +14,10 @@ import {
 
 // default imports
 import Image from 'next/image'
-// @ts-ignore
-import QrReader from 'react-qr-scanner'
 
 type FormValues = {
+  doctor: string;
+  patient: string;
   date: string;
   time: string;
   ailment: string;
@@ -25,12 +26,17 @@ type FormValues = {
   reports: FileList;
 }
 
+const codeReader = new BrowserQRCodeReader()
+
 const CreateAppointment: NextPage = () => {
+  // next router
+  const router = useRouter()
+
   // scanned patient id
   const [patientId, setPatientId] = useState<string>('')
 
   // react hook form
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>()
 
   // web3 hooks
   const address = useAddress()
@@ -40,48 +46,52 @@ const CreateAppointment: NextPage = () => {
 
   const handleMintNFT: SubmitHandler<FormValues> = async (data) => {
     if (address) {
-      console.log('data', data)
-
       const metadata = {
         name: `Appointment_${address}`,
         properties: data,
       }
 
       try {
-        const tx = await mintNft({
+        await mintNft({
           to: patientId,
           metadata,
         })
 
-        console.log('tx', tx)
+        await mintNft({
+          to: address,
+          metadata,
+        })
+
+        alert('Appointment created successfully!')
+        reset()
+        setPatientId('')
+        router.push('/dashboard')
       } catch (error) {
         console.log('error', error)
       }
     }
   }
 
+  // initially, scan the patient's QR code to get their address
+  useEffect(() => {
+    const handleScan = async () => {
+      const result = await codeReader.decodeOnceFromVideoDevice(undefined, 'video')
+      setPatientId(result.getText())
+    }
+
+    handleScan()
+  }, [codeReader, setPatientId])
+
   return (
     <section className='my-6'>
-      {patientId !== '' ? (
+      {patientId === '' ? (
         <>
           <h3 className={`text-center text-2xl mt-4 ${(address || !isMinting) ? 'mb-8' : 'mb-0'}`}>
             Scan Patient&apos;s QR
           </h3>
 
           <div className='max-w-3xl'>
-            <QrReader
-              delay={300}
-              style={{ width: '100%' }}
-              onError={(error: any) => {
-                console.log({ error })
-              }}
-              onScan={(result: { text: string }) => {
-                if (result) {
-                  console.log({ result })
-                  setPatientId(result.text)
-                }
-              }}
-            />
+            <video id='video' />
           </div>
         </>
       ) : (
@@ -105,6 +115,44 @@ const CreateAppointment: NextPage = () => {
             onSubmit={handleSubmit(handleMintNFT)}
             className='flex flex-col space-y-4 lg:space-y-6 mx-4 lg:max-w-screen-sm lg:mx-auto'
           >
+            <div>
+              <label htmlFor='doctor' hidden>
+                Your Name
+              </label>
+              <input
+                type='text'
+                id='doctor'
+                placeholder='Your name'
+                {...register('doctor', { required: true })}
+                className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
+              />
+
+              {errors.date && (
+                <p className='text-red-500 text-sm'>
+                  Please enter your name.
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor='patient' hidden>
+                Patient&apos;s Name
+              </label>
+              <input
+                type='text'
+                id='patient'
+                placeholder='Patient&apos;s name'
+                {...register('patient', { required: true })}
+                className='w-full border-2 border-gray-200 rounded px-4 py-2 focus:outline-none'
+              />
+
+              {errors.date && (
+                <p className='text-red-500 text-sm'>
+                  Please enter patient&apos;s name.
+                </p>
+              )}
+            </div>
+
             <div>
               <label htmlFor='date' hidden>
                 Date
