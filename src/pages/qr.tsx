@@ -2,10 +2,10 @@
 import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react'
 import { QRCodeSVG } from 'qrcode.react'
 import { DashboardLayout } from '../layouts'
+import { useCipher } from '../hooks'
 
 // default imports
 import Image from 'next/image'
-
 const PatientQR = () => {
   const address = useAddress()
   
@@ -36,7 +36,9 @@ const PatientQR = () => {
           Show this to your doctor so that they can verify your identity.
         </p>
         <div className='scale-[2]'>
-          <QRCodeSVG value={address} />
+          <QRCodeSVG
+            value={useCipher(address as string, true)}
+          />
         </div>
       </section>
     </DashboardLayout>

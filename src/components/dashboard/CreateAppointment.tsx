@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { BrowserQRCodeReader } from '@zxing/browser'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast, Toaster } from 'react-hot-toast'
+import { useCipher } from '../../hooks'
 import {
   useAddress,
   useContract,
@@ -35,9 +36,6 @@ const CreateAppointment: NextPage = () => {
   // next router
   const router = useRouter()
 
-  // loading states
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
   // scanned patient id
   const [patientId, setPatientId] = useState<string>('')
 
@@ -51,8 +49,6 @@ const CreateAppointment: NextPage = () => {
   const { mutateAsync: mintNft, isLoading: isMinting } = useMintNFT(contract)
 
   const handleMintNFT: SubmitHandler<FormValues> = async (data) => {
-    setIsLoading(true)
-
     const notification = toast.loading('Creating appointment...', {
       style: {
         background: '#059669',
@@ -73,7 +69,7 @@ const CreateAppointment: NextPage = () => {
 
       const patientMetadata = {
         name: `Appointment_${patientId}`,
-        properties: {
+        propeirtes: {
           ...data,
           appointmentId: Date.now(),
           patientId: patientId,
@@ -107,9 +103,7 @@ const CreateAppointment: NextPage = () => {
           }),
         })
 
-        if (response.status === 200) {
-          setIsLoading(false)
-          
+        if (response.status === 200) {          
           toast.success('Appointment created!', {
             id: notification,
             duration: 5000,
@@ -118,9 +112,7 @@ const CreateAppointment: NextPage = () => {
           reset()
           setPatientId('')
           router.push('/dashboard')
-        } else {
-          setIsLoading(false)
-          
+        } else {          
           toast.error('Something went wrong, please try again later.', {
             id: notification,
             duration: 5000,
@@ -136,7 +128,10 @@ const CreateAppointment: NextPage = () => {
   useEffect(() => {
     const handleScan = async () => {
       const result = await codeReader.decodeOnceFromVideoDevice(undefined, 'video')
-      setPatientId(result.getText())
+      
+      const deciphered = useCipher(result.getText(), false)
+
+      setPatientId(deciphered)
     }
 
     handleScan()
