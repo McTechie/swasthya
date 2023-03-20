@@ -2,7 +2,7 @@ type Appointment = {
   appointmentId: number;
   doctor: string;
   patient: string;
-  providerId: string;
+  doctorId: string;
   patientId: string;
   location: string;
   ailment: string;

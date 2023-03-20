@@ -174,8 +174,8 @@ const Login: NextPage = () => {
             className='h-14 bg-emerald-600 hover:bg-emerald-700 animate w-full text-white rounded-full mt-10 font-bold disabled:bg-gray-400 disabled:cursor-not-allowed'
           >
             {
-              hasSwasthyaNft ? <span>You have already minted</span> :
-              <span>Claim &#40;ERC 1155&#41; NFT</span>
+              hasSwasthyaNft ? <span>You already have access</span> :
+              <span>Access Dashboard</span>
             }
           </button>
 

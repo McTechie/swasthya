@@ -1,5 +1,6 @@
 // named imports
 import { ArrowUpRightIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
+import { toast, Toaster } from 'react-hot-toast'
 
 // default imports
 import CsvDownloadButton from 'react-json-to-csv'
@@ -14,17 +15,50 @@ const ListingTable = ({ appointments, userDataLoading, handleShowAppointmentDeta
   const handlePayment = async (e: React.MouseEvent<HTMLButtonElement>, sender: string, receiver: string, amount: number) => {
     e.stopPropagation()
 
+    const notification = toast.loading('Creating payment...', {
+      style: {
+        background: '#059669',
+        color: '#fff',
+      }
+    })
+
+    const MATIC_TO_MUBAI = amount / 83.05
+    const FINAL_AMT = 1000000000000000000 * MATIC_TO_MUBAI
+
+    console.log(sender, receiver, FINAL_AMT)
+
+    const params = [
+      {
+        from: sender,
+        to: receiver,
+        value: Number(FINAL_AMT).toString(16)
+      }
+    ]
+
     try {
-      console.log('Payment From: ', sender)
-      console.log('Payment To: ', receiver)
-      console.log('Payment Amount (rupees): ', amount)
+      // @ts-ignore
+      const result = await window.ethereum?.request({ method: 'eth_sendTransaction', params })
+
+      console.log(result)
+
+      toast.success('Payment Successful!', {
+        id: notification,
+        duration: 5000,
+      })
     } catch (error) {
       console.log(error)
+
+      toast.error('Payment Unsuccessful!', {
+        id: notification,
+        duration: 5000,
+      })
     }
   }
 
   return (
     <div>
+      <Toaster position='top-center' />
+
       {appointments?.length > 0 && (
         <div className='flex items-center justify-end'>
           <div className='text-white bg-indigo-500 py-2 px-4 mx-2 text-xs font-semibold rounded-full hover:shadow-sm shadow-indigo-300 hover:bg-indigo-700 cursor-pointer animate'>
@@ -86,7 +120,7 @@ const ListingTable = ({ appointments, userDataLoading, handleShowAppointmentDeta
                   &#8377; {appointment.consultationFee}
                 </p>
                 <button
-                  onClick={(e) => handlePayment(e, appointment.patientId, appointment.providerId, appointment.consultationFee)}
+                  onClick={(e) => handlePayment(e, appointment.patientId, appointment.doctorId, appointment.consultationFee)}
                   className='text-xs text-indigo-500 space-x-1 hover:underline'
                 >
                   <span>

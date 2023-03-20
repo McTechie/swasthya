@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 // named imports
 import { useEffect, useState } from 'react'
 import { DashboardLayout } from '../layouts'
-import { ListingTable, CreateAppointment, AppointmentDetails } from '../components'
+import { ListingTable, AppointmentDetails } from '../components'
 import {
   useAddress,
   useContract,

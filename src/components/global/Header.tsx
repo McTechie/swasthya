@@ -18,8 +18,8 @@ const Header = ({ hideLinks }: HeaderProps) => {
         <button className='flex items-center cursor-pointer group'>
           <Image src='/logo.png' alt='Logo' width={40} height={40} />
           <p className='ml-3 font-bold text-emerald-600 text-lg group-hover:scale-105 transition-all ease-in-out duration-300'>
-            Chain
-            <span className='text-indigo-500'>Bridge</span>
+            S
+            <span className='text-indigo-500'>wasthya</span>
           </p>
         </button>
       </Link>
